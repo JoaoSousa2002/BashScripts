@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/bin/bash 
 
-cd /home/joao/Desktop/'Estudos faculdade 02.2026'
+CaminhoPadrao="/home/joao/Desktop/'Estudos faculdade 02.2026'"
+cd $CaminhoPadrao
 
 # Cria e retorna pasta chamada ListaExercicioXX/ ou retorna a pasta Estudos/
 function CriarPastaOuNao {
@@ -24,6 +25,7 @@ function CriarPastaOuNao {
 }
 
 
+
 echo "================================================================================"
 echo "@              *                          *                     *              @"
 echo "@                     CRIAR ARQUIVO E ABRIR NO VSCODE                          @"
@@ -31,25 +33,25 @@ echo "@       *                *          *                     *               
 echo "================================================================================"
 
 echo ""
-read -p "Digite o nome do arquivo para criar (incluindo a extensão): " Resposta
+read -p "Digite o nome do arquivo para criar (incluindo a extensão):  " Resposta
+
 
 # Verificação e criação para arquivo Python
 # Não foi criado em função pois em bash a função não cria arquivo permanente com touch
 if echo $Resposta | grep -q ".py"; then
     cd Python/
     CaminhoPasta=$(CriarPastaOuNao $Resposta)
-    echo $CaminhoPasta
     cd $CaminhoPasta
     touch $Resposta
-    code $Resposta
+    code -n ../$CaminhoPasta -a $Resposta
 
 # Verificação e criação para arquivo JavaScript
-elif echo $Resposta | grep -q ".py" ;then
+elif echo $Resposta | grep -q ".js" ;then
     cd 'WEB I'/'Estudos JS'/Javascript/
     CaminhoPasta=$(CriarPastaOuNao $Resposta)
     cd $CaminhoPasta
-    touch $Resposta
-    code $Resposta
+    touch $CaminhoPasta/$Resposta
+    code -n ../$CaminhoPasta -a $Resposta
 
 else
     echo ""
@@ -57,8 +59,3 @@ else
     echo ""
     read -p "Pressione Enter para fechar..."
 fi
-
-
-
-
-
